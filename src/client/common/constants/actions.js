@@ -1,0 +1,13 @@
+export const SET_COUNTRY = "setCountry";
+export const SET_CATEGORIZED = "setCategorized";
+export const SET_TOPNEWS = "setTopNews";
+export const CLEAR_SEARCH_RESULTS = "clearSearch";
+export const SET_SEARCH_RESULTS = "setSearch";
+export const SET_ACTIVE_ARTICLE = "setActiveArticle";
+export const CLEAR_ACTIVE_ARTICLE = "clearActiveArticle";
+export const SET_ACTIVE_CATEGORY = "setActiveCategory";
+export const CLEAR_ACTIVE_CATEGORY = "clearActiveCategory";
+export const SET_PATH = "setPath";
+export const CLEAR_PATH = "clearPath";
+export const SET_LOADING = "setLoading";
+export const DISABLE_COUNTRY_SELECTOR = "disableCountrySelector";

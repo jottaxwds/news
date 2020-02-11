@@ -1,0 +1,66 @@
+import React, { useContext, useEffect } from "react";
+import * as S from "./styles";
+import { NewsContext } from "./../../../context";
+
+import Api from "./../../../api/Api";
+import {
+  SET_SEARCH_RESULTS,
+  SET_LOADING,
+  DISABLE_COUNTRY_SELECTOR
+} from "common/constants/actions";
+
+import SearchBar from "common/components/SearchBar/SearchBar";
+import SectionTitle from "common/components/SectionTitle/SectionTitle";
+import Search from "./Search";
+
+const SearchScreen = () => {
+  const {
+    state: {
+      searchResults: {
+        searchParam: currentSearchParam,
+        country: currentCountry,
+        articles
+      },
+      country
+    },
+    dispatch
+  } = useContext(NewsContext);
+
+  useEffect(() => {
+    dispatch({ type: SET_LOADING, value: false });
+  }, [country]);
+
+  const handleSearch = async searchValue => {
+    dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: true });
+    dispatch({ type: SET_LOADING, value: true });
+
+    const {
+      data: { filteredNews }
+    } = await Api.searchTopNewsByTerm({
+      country,
+      searchParam: searchValue
+    });
+
+    dispatch({
+      type: SET_SEARCH_RESULTS,
+      value: { searchParam: searchValue, country, articles: filteredNews }
+    });
+
+    dispatch({ type: SET_LOADING, value: false });
+    dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: false });
+  };
+
+  return (
+    <S.SearchScreen>
+      <SectionTitle message={`Search top news from ${country} by term:`} />
+
+      <S.SearchBarWrapper>
+        <SearchBar onSearch={handleSearch} />
+      </S.SearchBarWrapper>
+
+      {articles && articles.length > 0 && <Search articles={articles} />}
+    </S.SearchScreen>
+  );
+};
+
+export default SearchScreen;

@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  artifact:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    container_name: news_bff
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    environment:
+      ENV: local
+    volumes:
+      - '.:/usr/src/app'
+      - 'node-modules:/usr/src/app/node_modules'
+      - 'dist:/usr/src/app/dist'
+volumes:
+  node-modules:
+  dist:
