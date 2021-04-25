@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import * as S from "./styles";
+import * as S from './styles';
 
 const Slide = ({ slideNumber, slide, children }) => (
   <S.Slide isCurrent={slideNumber === slide}>
-    {children ? children : null}
+    {children || null}
   </S.Slide>
 );
 

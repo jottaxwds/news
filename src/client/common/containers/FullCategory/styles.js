@@ -1,7 +1,11 @@
-import styled from "@emotion/styled";
-import { space } from "common/styles/spacing";
-import screen from "common/styles/screen";
+import styled from '@emotion/styled';
 
-export const FullCategoryScreen = styled.div`
+import { space } from '../../styles/spacing';
+
+const FullCategoryScreen = styled.div`
   padding: ${space.x15};
 `;
+
+export {
+  FullCategoryScreen,
+};

@@ -1,5 +1,6 @@
-import React, { Suspense } from "react";
-import Spinner from "./Spinner";
+import React, { Suspense } from 'react';
+
+import Spinner from './Spinner';
 /**
  * Loads React.Suspense with children passed as prop
  * and spinner as fallback

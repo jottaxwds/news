@@ -1,12 +1,17 @@
-import { css } from "@emotion/core";
+import { css } from '@emotion/core';
 
-export const square = size => css`
+const square = (size) => css`
   height: ${size};
   width: ${size};
 `;
 
-export const circle = size => css`
+const circle = (size) => css`
   height: ${size};
   width: ${size};
   border-radius: 50%;
 `;
+
+export {
+  square,
+  circle,
+};

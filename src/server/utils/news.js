@@ -2,7 +2,7 @@
  * Method that takes unformatted news and return
  * an array with formatted news (only fields desired)
  *  Formatted Article structure:
- *  { 
+ *  {
  *    description
       content
       title
@@ -22,7 +22,7 @@ function parseNews(news) {
       title: current.title,
       sourceId: current.source.id,
       url: current.url,
-      thumb: current.urlToImage
+      thumb: current.urlToImage,
     };
     newArticles.push(article);
     return newArticles;
@@ -43,20 +43,17 @@ function parseNews(news) {
  *  @returns {Array} formattedCategories
  */
 function parseCategories(allCategories) {
-  const categories =
-    allCategories && allCategories.length > 0
-      ? [
-          ...new Set(
-            allCategories.map(item => {
-              return { categoryId: item.category, source: item.id };
-            })
-          )
-        ]
-      : [];
+  const categories = (allCategories && allCategories.length > 0)
+    ? [
+      ...new Set(
+        allCategories.map((item) => ({ categoryId: item.category, source: item.id })),
+      ),
+    ]
+    : [];
   return categories;
 }
 
 module.exports = {
-  parseNews: parseNews,
-  parseCategories: parseCategories
+  parseNews,
+  parseCategories,
 };

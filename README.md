@@ -21,22 +21,22 @@ TWO ways to install:
 
 #### Requirements
 
-- Yarn (or npm)
-https://yarnpkg.com/
+- Install npm < 15.0.0 due to new dependency resolver in newer versions of npm.
+  -> www.npmjs.com
 
 #### Run in dev environment
 
 It will run client and server together following logs
-- `yarn start:dev`
+- `npm start:dev`
 
 #### Run tests
 This will run server and client tests
-- `yarn test`
+- `npm test`
 
 #### Build and serve production package
 
 It will build client, then serve in 8080 both client and server together following logs
-- `yarn build && yarn serve`
+- `npm build && npm serve`
 
 App is now accesible at http://localhost:8080
 
@@ -125,9 +125,10 @@ For the NavBar I used react router and a customised way to implement the navigat
 
 Screens were lazy loaded into the application to improve performance rendering only what is needed on each time.
 
-## Testing: 
+## Eslint (update):
+Different ESLint configurations for Client & Server
 
-Unit Test coverage is not 100% because I did not have enough time. I normally ship 100% unit tested code, but in this time, without enough free time to work on the project, not only my testing skills are needed to be demonstrated so I decided to complete the acceptance criteria and provide a MVP.
+## Testing:
 For testing I decided to use React Testing Library. Since I started using it I felt in love. In fact `Enzyme` drives you to test doing things that a user can not do like using shallow render, getting component instance or getting/setting a component state. If the tests are used in a way like user interacts I ship my code with more confidence.
 `RTL` is also faster than `enzyme` as finding methods are lighter.
 
@@ -142,7 +143,6 @@ It connects docker `9000` port with the host one. Also creates volumes for the a
 
 - Split code in chunks with webpack: I am not an expert on this but basically code could be splitted in chunks to avoid duplication.
 - Typechecker: I worked before with technologies such as Typescript and Flow. They can be useful to avoid errors in the data handling, improve readability and discover invariants in the code before runtime, avoiding bugs.
-- ESLint: I did not have time enough to choose a god eslint configuration to format the code following best practices/standards and make it more readable.
 - GraphQL: It makes sense to have it in the server once it needs to manage big ammount of requests. In this case the data aggregation cames only from the same endpoint. In this time could be an overkill adding it, but not blocker to do it in the future.
 - E2E testing: Cypress for this purpose could be a perfect candidate.
 - Translations: Some texts could be needed to be translated... since we are only getting information for english speakers, this is not important now.

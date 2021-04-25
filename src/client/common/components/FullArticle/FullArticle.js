@@ -1,6 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import * as S from "./styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import * as S from './styles';
 
 const FullArticle = ({ title, imgUrl, content, onClose, url }) => (
   <S.ArticleContainer>
@@ -25,7 +26,7 @@ FullArticle.propTypes = {
   imgUrl: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
 };
 
 export default FullArticle;

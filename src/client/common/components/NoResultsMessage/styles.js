@@ -1,6 +1,7 @@
-import styled from "@emotion/styled";
-import { space } from "common/styles/spacing";
-import fonts from "common/styles/fonts";
+import styled from '@emotion/styled';
+
+import { space } from '../../styles/spacing';
+import fonts from '../../styles/fonts';
 
 export const Message = styled.h3`
   color: red;

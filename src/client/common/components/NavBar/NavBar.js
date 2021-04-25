@@ -1,31 +1,30 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import * as S from "./styles";
+import * as S from './styles';
+import Desktop from './Desktop/Desktop';
+import Mobile from './Mobile/Mobile';
 
-import Desktop from "./Desktop/Desktop";
-import Mobile from "./Mobile/Mobile";
-
-const NavBar = ({ children, location: { pathname } }) => {
+const NavBar = ({ location: { pathname } }) => {
   const highlight = (routePath, matcher) => {
-    var re = new RegExp(matcher, "g");
+    const re = new RegExp(matcher, 'g');
     return routePath.match(re);
   };
   return (
     <S.NavBarWrapper>
       <Desktop>
         <S.Left>
-          <S.DLink to={"/topnews"}>
-            <S.Title lighted={highlight(pathname, "topnews")}>Top News</S.Title>
+          <S.DLink to="/topnews">
+            <S.Title lighted={highlight(pathname, 'topnews')}>Top News</S.Title>
           </S.DLink>
-          <S.DLink to={"/categories"}>
-            <S.Title lighted={highlight(pathname, "categories")}>
+          <S.DLink to="/categories">
+            <S.Title lighted={highlight(pathname, 'categories')}>
               Categories
             </S.Title>
           </S.DLink>
-          <S.DLink to={"/search"}>
-            <S.Title lighted={highlight(pathname, "search")}>Search</S.Title>
+          <S.DLink to="/search">
+            <S.Title lighted={highlight(pathname, 'search')}>Search</S.Title>
           </S.DLink>
         </S.Left>
       </Desktop>
@@ -33,13 +32,13 @@ const NavBar = ({ children, location: { pathname } }) => {
       <Mobile>
         <S.MobileMenu>
           <S.MobileLink>
-            <S.MLink to={"/topnews"}>Top News</S.MLink>
+            <S.MLink to="/topnews">Top News</S.MLink>
           </S.MobileLink>
           <S.MobileLink>
-            <S.MLink to={"/categories"}>Categories</S.MLink>
+            <S.MLink to="/categories">Categories</S.MLink>
           </S.MobileLink>
           <S.MobileLink>
-            <S.MLink to={"/search"}>Search</S.MLink>
+            <S.MLink to="/search">Search</S.MLink>
           </S.MobileLink>
         </S.MobileMenu>
       </Mobile>
@@ -48,17 +47,15 @@ const NavBar = ({ children, location: { pathname } }) => {
 };
 
 NavBar.defaultProps = {
-  children: null,
   location: {
-    pathname: "gb"
-  }
+    pathname: 'gb',
+  },
 };
 
 NavBar.propTypes = {
-  children: PropTypes.node,
   location: PropTypes.shape({
-    pathname: PropTypes.string
-  })
+    pathname: PropTypes.string,
+  }),
 };
 
 export default withRouter(NavBar);

@@ -1,15 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import * as S from "./styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import * as S from './styles';
 
 const SectionTitle = ({ message }) => <S.Message>{message}</S.Message>;
 
 SectionTitle.defaultProps = {
-  message: ""
+  message: '',
 };
 
 SectionTitle.propTypes = {
-  message: PropTypes.string
+  message: PropTypes.string,
 };
 
 export default SectionTitle;

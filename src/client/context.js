@@ -1,4 +1,5 @@
-import React, { useReducer } from "react";
+import React, { useReducer } from 'react';
+
 import {
   SET_CATEGORIZED,
   SET_SEARCH_RESULTS,
@@ -12,23 +13,23 @@ import {
   CLEAR_PATH,
   SET_COUNTRY,
   SET_LOADING,
-  DISABLE_COUNTRY_SELECTOR
-} from "common/constants/actions";
+  DISABLE_COUNTRY_SELECTOR,
+} from './common/constants/actions';
 
 const initialState = {
-  categorizedArticles: { country: "", categorized: [] },
-  topNewsByCountry: { country: "", articles: [] },
-  searchResults: { searchParam: "", country: "", articles: [] },
+  categorizedArticles: { country: '', categorized: [] },
+  topNewsByCountry: { country: '', articles: [] },
+  searchResults: { searchParam: '', country: '', articles: [] },
   activeArticle: {},
-  country: "gb",
-  latestPath: "",
+  country: 'gb',
+  latestPath: '',
   globalLoading: false,
-  countrySelectorDisabled: false
+  countrySelectorDisabled: false,
 };
 
 const NewsContext = React.createContext(initialState);
 
-let reducer = (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case SET_COUNTRY:
       return { ...state, country: action.value };
@@ -51,13 +52,12 @@ let reducer = (state, action) => {
     case SET_PATH:
       return { ...state, latestPath: action.value };
     case CLEAR_PATH:
-      return { ...state, latestPath: "" };
+      return { ...state, latestPath: '' };
     case SET_LOADING:
       return { ...state, globalLoading: action.value };
     case DISABLE_COUNTRY_SELECTOR:
       return { ...state, countrySelectorDisabled: action.value };
     default:
-      return;
   }
 };
 

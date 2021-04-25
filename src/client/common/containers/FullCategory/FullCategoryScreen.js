@@ -1,72 +1,52 @@
-import React, { useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
-
-import { NewsContext } from "./../../../context";
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
-  CLEAR_ACTIVE_CATEGORY,
-  CLEAR_PATH,
   SET_ACTIVE_ARTICLE,
   SET_PATH,
-  DISABLE_COUNTRY_SELECTOR
-} from "common/constants/actions";
-
-import * as S from "./styles";
-import SectionTitle from "common/components/SectionTitle/SectionTitle";
-import NewsList from "common/components/NewsList/NewsList";
-import Card from "common/components/Card/Card";
+  DISABLE_COUNTRY_SELECTOR,
+} from '../../constants/actions';
+import SectionTitle from '../../components/SectionTitle/SectionTitle';
+import NewsList from '../../components/NewsList/NewsList';
+import Card from '../../components/Card/Card';
+import NoResultsMessage from '../../components/NoResultsMessage/NoResultsMessage';
+import * as S from './styles';
+import { NewsContext } from '../../../context';
 
 const FullCategoryScreen = () => {
-  let history = useHistory();
-  const {
-    state: {
-      activeCategory: { category, articles },
-      latestPath,
-      country
-    },
-    dispatch
-  } = useContext(NewsContext);
-
-  const closeFullCategory = () => {
-    dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: false });
-    dispatch({
-      type: CLEAR_ACTIVE_CATEGORY,
-      value: {}
-    });
-
-    history.push(latestPath);
-  };
+  const history = useHistory();
+  const { state: { activeCategory: { category, articles }, country }, dispatch } = useContext(NewsContext);
 
   const openArticle = ({ content, thumb, title, url }) => {
     dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: true });
     dispatch({
       type: SET_ACTIVE_ARTICLE,
-      value: { content, thumb, title, url }
+      value: { content, thumb, title, url },
     });
     dispatch({
       type: SET_PATH,
-      value: "/categories/category"
+      value: '/categories/category',
     });
-    history.push("/categories/article");
+    history.push('/categories/article');
   };
   return (
     <S.FullCategoryScreen>
       <SectionTitle message={`Top ${category} news from ${country}`} />
       <NewsList>
-        {articles && articles.length > 0 ? (
+        { (articles && articles.length > 0) ? (
           articles.map(({ description, content, thumb, title, url }, index) => (
             <Card
               key={`news_${index}`}
-              title={title || ""}
-              description={description || ""}
-              thumb={thumb || ""}
+              title={title || ''}
+              description={description || ''}
+              thumb={thumb || ''}
               onCardOpen={() => {
                 openArticle({ content, thumb, title, url });
               }}
             />
           ))
         ) : (
-          <NoResultsMessage message={"No news to show..."}></NoResultsMessage>
+          <NoResultsMessage message="No news to show..." />
         )}
       </NewsList>
     </S.FullCategoryScreen>

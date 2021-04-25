@@ -1,6 +1,7 @@
-import styled from "@emotion/styled";
-import { space } from "common/styles/spacing";
-import screen from "common/styles/screen";
+import styled from '@emotion/styled';
+
+import { space } from '../../styles/spacing';
+import screen from '../../styles/screen';
 
 export const NewsList = styled.ul`
   display: flex;

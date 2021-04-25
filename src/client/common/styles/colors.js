@@ -4,10 +4,10 @@
  */
 
 const colors = {
-  white: "#fff",
-  black: "#000",
-  blueLight: "#00d2ff",
-  blueMid: "#3a7bd5"
+  white: '#fff',
+  black: '#000',
+  blueLight: '#00d2ff',
+  blueMid: '#3a7bd5',
 };
 
 export default colors;

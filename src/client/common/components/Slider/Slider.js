@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import * as S from "./styles";
-import SlideButton from "./SlideButton";
-import Slide from "./Slide";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import * as S from './styles';
+import SlideButton from './SlideButton';
+import Slide from './Slide';
 
 const Slider = ({ children, prevIcon, nextIcon, keyIndex }) => {
   const [currentSlide, setSlide] = useState(0);
-  const nextSlide =
-    currentSlide < children.length - 1 ? currentSlide + 1 : currentSlide;
-  const prevSlide = currentSlide <= 1 ? 0 : currentSlide - 1;
+  const nextSlide = (currentSlide < children.length - 1) ? currentSlide + 1 : currentSlide;
+  const prevSlide = (currentSlide <= 1) ? 0 : currentSlide - 1;
 
   return (
     <S.Slider>
       <SlideButton
-        data-testid={"slide-back"}
+        data-testid="slide-back"
         onClick={() => {
           setSlide(prevSlide);
         }}
       >
-        <S.SlideButtonIndicator data-testid={"prev-indicator"}>
-          {prevIcon ? prevIcon : `<`}
+        <S.SlideButtonIndicator data-testid="prev-indicator">
+          {prevIcon || '<'}
         </S.SlideButtonIndicator>
       </SlideButton>
       <S.Carousel
-        data-testid={"slider-carousel"}
+        data-testid="slider-carousel"
         slides={children.length}
         slide={currentSlide}
       >
@@ -38,13 +38,13 @@ const Slider = ({ children, prevIcon, nextIcon, keyIndex }) => {
         ))}
       </S.Carousel>
       <SlideButton
-        data-testid={"slide-next"}
+        data-testid="slide-next"
         onClick={() => {
           setSlide(nextSlide);
         }}
       >
-        <S.SlideButtonIndicator data-testid={"next-indicator"}>
-          {nextIcon ? nextIcon : `>`}
+        <S.SlideButtonIndicator data-testid="next-indicator">
+          {nextIcon || '>'}
         </S.SlideButtonIndicator>
       </SlideButton>
     </S.Slider>
@@ -54,14 +54,14 @@ const Slider = ({ children, prevIcon, nextIcon, keyIndex }) => {
 Slider.defaultProps = {
   prevIcon: null,
   nextIcon: null,
-  keyIndex: ""
+  keyIndex: '',
 };
 
 Slider.propTypes = {
   children: PropTypes.node.isRequired,
   prevIcon: PropTypes.node,
   nextIcon: PropTypes.node,
-  keyIndex: PropTypes.string
+  keyIndex: PropTypes.string,
 };
 
 export default Slider;

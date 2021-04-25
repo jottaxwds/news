@@ -1,49 +1,36 @@
-import React, { useContext, useEffect } from "react";
-import * as S from "./styles";
-import { NewsContext } from "./../../../context";
+import React, { useContext, useEffect } from 'react';
 
-import Api from "./../../../api/Api";
 import {
   SET_SEARCH_RESULTS,
   SET_LOADING,
-  DISABLE_COUNTRY_SELECTOR
-} from "common/constants/actions";
-
-import SearchBar from "common/components/SearchBar/SearchBar";
-import SectionTitle from "common/components/SectionTitle/SectionTitle";
-import Search from "./Search";
+  DISABLE_COUNTRY_SELECTOR,
+} from '../../constants/actions';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import SectionTitle from '../../components/SectionTitle/SectionTitle';
+import * as S from './styles';
+import { NewsContext } from '../../../context';
+import Api from '../../../api/Api';
+import Search from './Search';
 
 const SearchScreen = () => {
-  const {
-    state: {
-      searchResults: {
-        searchParam: currentSearchParam,
-        country: currentCountry,
-        articles
-      },
-      country
-    },
-    dispatch
-  } = useContext(NewsContext);
+  const { state: { searchResults: { articles }, country }, dispatch } = useContext(NewsContext);
 
   useEffect(() => {
     dispatch({ type: SET_LOADING, value: false });
   }, [country]);
 
-  const handleSearch = async searchValue => {
+  const handleSearch = async (searchValue) => {
     dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: true });
     dispatch({ type: SET_LOADING, value: true });
 
-    const {
-      data: { filteredNews }
-    } = await Api.searchTopNewsByTerm({
+    const { data: { filteredNews } } = await Api.searchTopNewsByTerm({
       country,
-      searchParam: searchValue
+      searchParam: searchValue,
     });
 
     dispatch({
       type: SET_SEARCH_RESULTS,
-      value: { searchParam: searchValue, country, articles: filteredNews }
+      value: { searchParam: searchValue, country, articles: filteredNews },
     });
 
     dispatch({ type: SET_LOADING, value: false });

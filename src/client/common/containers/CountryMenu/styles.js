@@ -1,10 +1,8 @@
-import styled from "@emotion/styled";
-import { space } from "common/styles/spacing";
-import colors from "common/styles/colors";
-import fonts from "common/styles/fonts";
-import screen from "common/styles/screen";
+import styled from '@emotion/styled';
 
-export const CountryMenu = styled.div`
+import { space } from '../../styles/spacing';
+
+const CountryMenu = styled.div`
   margin: ${space.x15} ${space.x1} 0 0;
   display: flex;
   flex-flow: row;
@@ -13,3 +11,7 @@ export const CountryMenu = styled.div`
   right: 0;
   z-index: 999;
 `;
+
+export {
+  CountryMenu,
+};

@@ -1,9 +1,9 @@
-import { css } from "@emotion/core";
-import styled from "@emotion/styled";
-import colors from "common/styles/colors";
-import { space } from "common/styles/spacing";
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 
-export const AppStyles = css`
+import colors from './common/styles/colors';
+
+const AppStyles = css`
   body {
     margin: 0;
     padding: 0;
@@ -13,20 +13,27 @@ export const AppStyles = css`
   }
 `;
 
-export const AppContainer = styled.div`
+const AppContainer = styled.div`
   width: 100%;
   display: block;
   padding: 0;
 `;
 
-export const AppSection = styled.div`
+const AppSection = styled.div`
   width: 100%;
   display: block;
 `;
 
-export const AppContent = styled.div`
+const AppContent = styled.div`
   background-color: ${colors.white};
   max-width: 1200px;
   margin: auto;
   border: 1px solid black;
 `;
+
+export {
+  AppStyles,
+  AppContent,
+  AppContainer,
+  AppSection,
+};

@@ -1,27 +1,23 @@
-import React, { useContext } from "react";
-import { NewsContext } from "./context";
+import React, { useContext } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Redirect,
-  withRouter
-} from "react-router-dom";
+  withRouter,
+} from 'react-router-dom';
+
+import { NewsContext } from './context';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const {
-    state: { activeArticle, activeCategory }
-  } = useContext(NewsContext);
+  const { state: { activeArticle, activeCategory } } = useContext(NewsContext);
 
   return (
     <Route
       {...rest}
-      render={props =>
-        activeArticle || activeCategory ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/" />
-        )
-      }
+      render={(props) => ((activeArticle || activeCategory) ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/" />
+      ))}
     />
   );
 };

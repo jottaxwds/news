@@ -1,19 +1,19 @@
-import { css } from "@emotion/core";
+import { css } from '@emotion/core';
 
-import colors from "./colors";
-import fonts from "./fonts";
+import colors from './colors';
+import fonts from './fonts';
 
 // Global constants
-export const appGlobals = {
+const appGlobals = {
   maxWidth: 1088,
   maxHeight: 648,
   verticalAir: 32,
   horizontalAir: 32,
-  summaryAsideWidth: 312
+  summaryAsideWidth: 312,
 };
 
 // Global css
-export const global = css`
+const global = css`
   html {
     box-sizing: border-box;
     font-size: ${fonts.sizes.base};
@@ -203,3 +203,8 @@ export const global = css`
     line-height: ${fonts.lineHeights.regular};
   }
 `;
+
+export {
+  global,
+  appGlobals,
+};

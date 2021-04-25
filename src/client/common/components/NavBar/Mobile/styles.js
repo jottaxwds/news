@@ -1,15 +1,16 @@
-import styled from "@emotion/styled";
-import { space } from "common/styles/spacing";
-import fonts from "common/styles/fonts";
-import screen from "common/styles/screen";
+import styled from '@emotion/styled';
 
-export const OpenButton = styled.button`
+import { space } from '../../../styles/spacing';
+import fonts from '../../../styles/fonts';
+import screen from '../../../styles/screen';
+
+const OpenButton = styled.button`
   cursor: pointer;
   font-size: ${fonts.sizes.m};
   padding: ${space.x15} ${space.x15};
 `;
 
-export const Mobile = styled.div`
+const Mobile = styled.div`
   display: none;
 
   @media screen and (max-width: ${screen.m}) {
@@ -21,7 +22,7 @@ export const Mobile = styled.div`
   }
 `;
 
-export const CloseButton = styled.button`
+const CloseButton = styled.button`
   position: absolute;
   right: 0;
   top: 0;
@@ -30,14 +31,21 @@ export const CloseButton = styled.button`
   padding: ${space.x15} ${space.x15};
 `;
 
-export const Menu = styled.div`
+const Menu = styled.div`
   position: absolute;
   height: 100%;
   padding: ${space.x1} ${space.x1};
   width: 100%;
   background-color: white;
-  display: ${({ isOpen }) => (isOpen ? `inline-block` : `none`)};
+  display: ${({ isOpen }) => ((isOpen) ? 'inline-block' : 'none')};
   top: 0;
   left: 0;
   z-index: 999;
 `;
+
+export {
+  OpenButton,
+  Mobile,
+  CloseButton,
+  Menu,
+};

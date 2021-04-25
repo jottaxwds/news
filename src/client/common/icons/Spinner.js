@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import Svg from "./Svg";
+import Svg from './Svg';
 
-const Spinner = props => (
+const Spinner = (props) => (
   <Svg
     width="200"
     height="200"

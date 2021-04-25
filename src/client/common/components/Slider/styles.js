@@ -1,7 +1,8 @@
-import styled from "@emotion/styled";
-import { space } from "common/styles/spacing";
+import styled from '@emotion/styled';
 
-export const Slide = styled.div`
+import { space } from '../../styles/spacing';
+
+const Slide = styled.div`
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -9,7 +10,7 @@ export const Slide = styled.div`
   padding: ${space.x025} ${space.x1};
 `;
 
-export const Slider = styled.div`
+const Slider = styled.div`
   display: block;
   width: 100%;
   margin: auto;
@@ -18,16 +19,16 @@ export const Slider = styled.div`
   overflow: hidden;
 `;
 /* padding: ${space.x025} ${space.x2}; */
-export const Carousel = styled.div`
+const Carousel = styled.div`
   display: inline-block;
   height: 100%;
   width: ${({ slides }) => slides * 100}%;
   display: flex;
-  margin-left: ${({ slide }) => (slide === 0 ? "0" : `-${slide * 100}%`)};
+  margin-left: ${({ slide }) => ((slide === 0) ? '0' : `-${slide * 100}%`)};
   transition: margin 300ms ease-in-out;
 `;
 
-export const SlideButton = styled.div`
+const SlideButton = styled.div`
   background-color: white;
   height: 30px;
   width: 30px;
@@ -53,7 +54,15 @@ export const SlideButton = styled.div`
   }
 `;
 
-export const SlideButtonIndicator = styled.span`
+const SlideButtonIndicator = styled.span`
   width: 100%;
   text-align: center;
 `;
+
+export {
+  Slide,
+  Slider,
+  Carousel,
+  SlideButton,
+  SlideButtonIndicator,
+};

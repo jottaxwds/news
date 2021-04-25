@@ -1,9 +1,10 @@
-const NewsAPI = require("newsapi");
-const utils = require("../utils/news");
+const NewsAPI = require('newsapi');
 
-const API_KEY = process.env.API_KEY;
-const DEFAULT_LANGUAGE = "en";
-const DEFAULT_SORTING = "relevancy";
+const utils = require('../utils/news');
+
+const { API_KEY } = process.env;
+const DEFAULT_LANGUAGE = 'en';
+const DEFAULT_SORTING = 'relevancy';
 
 async function getTopNewsByCountry(country) {
   if (API_KEY) {
@@ -11,20 +12,18 @@ async function getTopNewsByCountry(country) {
     const topNews = await newsapi.v2
       .topHeadlines({
         language: DEFAULT_LANGUAGE,
-        country: country
+        country,
       })
-      .then(response => {
+      .then((response) => {
         if (response && response.articles) {
           return utils.parseNews(response.articles);
-        } else {
-          return [];
         }
+        return [];
       })
-      .catch(err => null);
+      .catch(() => null);
     return topNews;
-  } else {
-    return null;
   }
+  return null;
 }
 
 async function getAvailableCategoriesByCountry(country) {
@@ -32,40 +31,24 @@ async function getAvailableCategoriesByCountry(country) {
     const newsapi = new NewsAPI(API_KEY);
     const categories = await newsapi.v2
       .sources({
-        language: "en",
-        country: country
+        language: 'en',
+        country,
       })
-      .then(response => {
+      .then((response) => {
         if (response && response.sources) {
           const categoriesInfo = utils.parseCategories(response.sources);
           const differentCategories = [
-            ...new Set(response.sources.map(item => item.category))
+            ...new Set(response.sources.map((item) => item.category)),
           ];
 
           return { categoriesInfo, differentCategories };
-        } else {
-          return [];
         }
+        return [];
       })
-      .catch(err => null);
+      .catch(() => null);
     return categories;
-  } else {
-    return null;
   }
-}
-
-async function getTopFiveFromAllCategoriesByCountry({ categories, country }) {
-  const newsByCategory = await Promise.all(
-    categories.map(category =>
-      getTopNewsByCategoryAndCountry({
-        category,
-        country,
-        limit: 5
-      })
-    )
-  );
-
-  return await newsByCategory;
+  return null;
 }
 
 async function getTopNewsByCategoryAndCountry({ category, country, limit }) {
@@ -77,44 +60,52 @@ async function getTopNewsByCategoryAndCountry({ category, country, limit }) {
         language: DEFAULT_LANGUAGE,
         country,
         category,
-        pageSize: limit
+        pageSize: limit,
       })
-      .then(response => {
+      .then((response) => {
         if (response && response.articles) {
           return utils.parseNews(response.articles);
-        } else {
-          return [];
         }
+        return [];
       })
-      .catch(err => null);
-    return { category: category, articles: topNews };
-  } else {
-    return [];
+      .catch(() => null);
+    return { category, articles: topNews };
   }
+  return [];
 }
 
-async function getAllNewsBySourcesAndCountry({ sourcesByCategory, country }) {
+async function getTopFiveFromAllCategoriesByCountry({ categories, country }) {
+  const newsByCategory = await Promise.all(
+    categories.map((category) => getTopNewsByCategoryAndCountry({
+      category,
+      country,
+      limit: 5,
+    })),
+  );
+
+  return newsByCategory;
+}
+
+async function getAllNewsBySourcesAndCountry({ sourcesByCategory }) {
   if (API_KEY) {
-    const sourcesParam = sourcesByCategory.join(",");
+    const sourcesParam = sourcesByCategory.join(',');
     const newsapi = new NewsAPI(API_KEY);
     const filteredNews = await newsapi.v2
       .everything({
         sources: sourcesParam,
         language: DEFAULT_LANGUAGE,
-        sortBy: DEFAULT_SORTING
+        sortBy: DEFAULT_SORTING,
       })
-      .then(response => {
+      .then((response) => {
         if (response && response.articles) {
           return utils.parseNews(response.articles);
-        } else {
-          return [];
         }
+        return [];
       })
-      .catch(err => null);
+      .catch(() => null);
     return filteredNews;
-  } else {
-    return [];
   }
+  return [];
 }
 
 async function getNewsBySearchParam({ search }) {
@@ -124,26 +115,24 @@ async function getNewsBySearchParam({ search }) {
       .everything({
         q: search,
         language: DEFAULT_LANGUAGE,
-        sortBy: DEFAULT_SORTING
+        sortBy: DEFAULT_SORTING,
       })
-      .then(response => {
+      .then((response) => {
         if (response && response.articles) {
           return utils.parseNews(response.articles);
-        } else {
-          return [];
         }
+        return [];
       })
-      .catch(err => null);
+      .catch(() => null);
     return filteredNews;
-  } else {
-    return [];
   }
+  return [];
 }
 
 module.exports = {
-  getTopNewsByCountry: getTopNewsByCountry,
-  getAvailableCategoriesByCountry: getAvailableCategoriesByCountry,
-  getTopFiveFromAllCategoriesByCountry: getTopFiveFromAllCategoriesByCountry,
-  getAllNewsBySourcesAndCountry: getAllNewsBySourcesAndCountry,
-  getNewsBySearchParam: getNewsBySearchParam
+  getTopNewsByCountry,
+  getAvailableCategoriesByCountry,
+  getTopFiveFromAllCategoriesByCountry,
+  getAllNewsBySourcesAndCountry,
+  getNewsBySearchParam,
 };

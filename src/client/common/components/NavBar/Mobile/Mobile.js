@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import * as S from "./styles";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { useToggle } from "./../../utils/hooks";
+import * as S from './styles';
+import { useToggle } from '../../utils/hooks';
 
 const Mobile = ({ children }) => {
   const [isOpen, toggleOpen] = useToggle(false);
@@ -37,10 +37,10 @@ const Mobile = ({ children }) => {
 };
 
 Mobile.defaultProps = {
-  children: null
+  children: null,
 };
 Mobile.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default Mobile;

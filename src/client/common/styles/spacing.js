@@ -1,5 +1,6 @@
-import { rem } from "polished";
-import fonts from "./fonts";
+import { rem } from 'polished';
+
+import fonts from './fonts';
 
 const base = 8;
 
@@ -21,10 +22,10 @@ const sizes = [
   6,
   7,
   8,
-  9
+  9,
 ];
 
-const pixelsToRem = value => rem(value, fonts.sizes.base);
+const pixelsToRem = (value) => rem(value, fonts.sizes.base);
 
 // Spacing
 /**
@@ -34,15 +35,19 @@ const pixelsToRem = value => rem(value, fonts.sizes.base);
  * // returns 1.6rem
  * space.x2
  */
-export const space = sizes.reduce((result, size) => {
+const space = sizes.reduce((result, size) => {
   const value = { ...result };
-  const sizeName = `x${size.toString().replace(".", "")}`;
+  const sizeName = `x${size.toString().replace('.', '')}`;
   value[sizeName] = pixelsToRem(base * size);
   return value;
 }, {});
 
-// Border
-export const border = {
-  size: `1px`,
-  radius: `4px`
+const border = {
+  size: '1px',
+  radius: '4px',
+};
+
+export {
+  space,
+  border,
 };

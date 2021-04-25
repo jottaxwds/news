@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
-import * as S from "./styles";
-import SectionTitle from "common/components/SectionTitle/SectionTitle";
-import Categories from "./Categories";
-import { NewsContext } from "./../../../context";
+import React, { useContext } from 'react';
+
+import SectionTitle from '../../components/SectionTitle/SectionTitle';
+import * as S from './styles';
+import Categories from './Categories';
+import { NewsContext } from '../../../context';
 
 const CategoriesScreen = () => {
-  const {
-    state: { country },
-    dispatch
-  } = useContext(NewsContext);
+  const { state: { country } } = useContext(NewsContext);
 
   return (
     <S.CategoryScreen>

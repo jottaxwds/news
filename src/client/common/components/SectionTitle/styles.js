@@ -1,7 +1,8 @@
-import styled from "@emotion/styled";
-import { space } from "common/styles/spacing";
-import fonts from "common/styles/fonts";
-import screen from "common/styles/screen";
+import styled from '@emotion/styled';
+
+import { space } from '../../styles/spacing';
+import fonts from '../../styles/fonts';
+import screen from '../../styles/screen';
 
 export const Message = styled.h2`
   font-size: ${fonts.sizes.l};

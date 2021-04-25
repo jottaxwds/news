@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import * as S from "./styles";
+import * as S from './styles';
 
 const SearchBar = ({ onSearch }) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   return (
     <S.SearchBarWrapper>
       <S.SearchInput
-        data-testid={"search-input"}
+        data-testid="search-input"
         value={searchValue}
-        onChange={e => {
-          setSearchValue(e.target.value || "");
+        onChange={(e) => {
+          setSearchValue(e.target.value || '');
         }}
-        placeholder={"Search term..."}
+        placeholder="Search term..."
       />
       <S.SearchCTA
-        data-testid={"search-cta"}
+        data-testid="search-cta"
         onClick={() => {
           onSearch(searchValue);
         }}
@@ -29,7 +29,7 @@ const SearchBar = ({ onSearch }) => {
 };
 
 SearchBar.propTypes = {
-  onSearch: PropTypes.func.isRequired
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

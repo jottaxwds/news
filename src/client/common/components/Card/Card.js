@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import * as S from "./styles";
+import * as S from './styles';
 
 const Card = ({ title, thumb, description, moreText, onCardOpen }) => (
   <S.Card>
@@ -19,8 +19,8 @@ const Card = ({ title, thumb, description, moreText, onCardOpen }) => (
 );
 
 Card.defaultProps = {
-  moreText: "Read More",
-  onCardOpen: () => {}
+  moreText: 'Read More',
+  onCardOpen: () => {},
 };
 
 Card.propTypes = {
@@ -28,7 +28,7 @@ Card.propTypes = {
   thumb: PropTypes.string.isRequired,
   onCardOpen: PropTypes.func,
   moreText: PropTypes.string,
-  description: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired,
 };
 
 export default Card;

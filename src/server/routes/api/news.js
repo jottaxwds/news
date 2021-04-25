@@ -1,101 +1,89 @@
-const express = require("express");
-const router = express.Router();
-const newsController = require("./../../controllers/news");
+const express = require('express');
 
-const DEFAULT_COUNTRY = "gb";
+const router = express.Router();
+const newsController = require('../../controllers/news');
+
+const DEFAULT_COUNTRY = 'gb';
 
 // @route   GET api/news/topnews
 // @desc    Get topnews by given country
 // @access  Public
-router.get("/topnews/:country?", async (req, res) => {
-  const {
-    params: { country = DEFAULT_COUNTRY }
-  } = req;
+router.get('/topnews/:country?', async (req, res) => {
+  const { params: { country = DEFAULT_COUNTRY } } = req;
   const topNews = await newsController.getTopNewsByCountry(country);
 
-  res.json({ topNews } || { err: "NO_NEWS", msg: "No news found" });
+  res.json({ topNews } || { err: 'NO_NEWS', msg: 'No news found' });
 });
 
 // @route   GET api/news/categories
 // @desc    Get top 5 news by given category and country
 // @access  Public
-router.get("/categories/:country?", async (req, res) => {
-  const {
-    params: { country = DEFAULT_COUNTRY }
-  } = req;
+router.get('/categories/:country?', async (req, res) => {
+  const { params: { country = DEFAULT_COUNTRY } } = req;
 
-  const {
-    differentCategories,
-    categoriesInfo
-  } = await newsController.getAvailableCategoriesByCountry(country);
+  const { differentCategories } = await newsController.getAvailableCategoriesByCountry(country);
 
   const topNewsByCategory = await newsController.getTopFiveFromAllCategoriesByCountry(
     {
       categories: differentCategories,
-      country
-    }
+      country,
+    },
   );
   res.json(
     { topNewsByCategory } || {
-      err: "NO_CATEGORIES",
-      msg: "No categories found"
-    }
+      err: 'NO_CATEGORIES',
+      msg: 'No categories found',
+    },
   );
 });
 
 // @route   GET api/news/category
 // @desc    Get all news by given category and country
 // @access  Public
-router.get("/category/:country/:category", async (req, res) => {
-  const {
-    params: { country = DEFAULT_COUNTRY, category = "" }
-  } = req;
+router.get('/category/:country/:category', async (req, res) => {
+  const { params: { country = DEFAULT_COUNTRY, category = '' } } = req;
 
-  const {
-    categoriesInfo
-  } = await newsController.getAvailableCategoriesByCountry(country);
+  const { categoriesInfo } = await newsController.getAvailableCategoriesByCountry(country);
 
-  let sourcesByCategory = categoriesInfo.reduce(
+  const sourcesByCategory = categoriesInfo.reduce(
     (sources, { categoryId, source }) => {
-      category === categoryId && sources.push(source);
+      if (category === categoryId) { sources.push(source); }
       return sources;
     },
-    []
+    [],
   );
 
   const newsBySources = await newsController.getAllNewsBySourcesAndCountry({
     sourcesByCategory,
-    country
+    country,
   });
 
   res.json(
     { category, articles: [...newsBySources] } || {
-      err: "NO_CATEGORIES",
+      err: 'NO_CATEGORIES',
 
-      msg: "No categories found"
-    }
+      msg: 'No categories found',
+    },
   );
 });
 
 // @route   GET api/news/search
 // @desc    Search news in country by given search param
 // @access  Public
-router.get("/search/:country?/:searchParam?", async (req, res) => {
-  const {
-    params: { country = DEFAULT_COUNTRY, searchParam = "" }
-  } = req;
+router.get('/search/:country?/:searchParam?', async (req, res) => {
+  const { params: { searchParam = '' } } = req;
 
   const filteredNews = await newsController.getNewsBySearchParam({
-    search: searchParam
+    search: searchParam,
   });
 
   res.json(
-    { filteredNews } || { err: "NO_ARTICLES", msg: "No articles found" }
+    { filteredNews } || { err: 'NO_ARTICLES', msg: 'No articles found' },
   );
 });
 
-router.get("/test", (req, res) => {
-  res.json({ msg: "COOL!" });
+router.get('/test', (req, res) => {
+  res.json({ msg: 'COOL!' });
 });
 
 module.exports = router;

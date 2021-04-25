@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
-import colors from "common/styles/colors";
+import styled from '@emotion/styled';
+
+import colors from '../../styles/colors';
 
 const SpinnerWrapper = styled.div`
   width: 100%;
