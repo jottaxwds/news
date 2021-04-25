@@ -28,7 +28,7 @@ const TopNews = () => {
       try {
         dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: true });
         dispatch({ type: SET_LOADING, value: true });
-        const { data: { topNews } } = await Api.getTopNewsByCountry({ country });
+        const { topNews } = await Api.getTopNewsByCountry({ country });
         dispatch({ type: SET_TOPNEWS, value: { country, articles: topNews } });
         dispatch({ type: SET_LOADING, value: false });
         dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: false });

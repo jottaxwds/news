@@ -23,7 +23,7 @@ const SearchScreen = () => {
     dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: true });
     dispatch({ type: SET_LOADING, value: true });
 
-    const { data: { filteredNews } } = await Api.searchTopNewsByTerm({
+    const { filteredNews } = await Api.searchTopNewsByTerm({
       country,
       searchParam: searchValue,
     });

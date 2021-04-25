@@ -15,6 +15,8 @@ const PORT = process.env.SERVER_PORT || '9001';
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // CORS
+  res.header('Access-Control-Allow-Headers', '*'); // CORS
+
   next();
 });
 

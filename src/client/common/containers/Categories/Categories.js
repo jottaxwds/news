@@ -30,7 +30,7 @@ const Categories = () => {
       try {
         dispatch({ type: DISABLE_COUNTRY_SELECTOR, value: true });
         dispatch({ type: SET_LOADING, value: true });
-        const { data: { topNewsByCategory } } = await Api.getTopFiveCategorized({ country });
+        const { topNewsByCategory } = await Api.getTopFiveCategorized({ country });
 
         dispatch({
           type: SET_CATEGORIZED,
@@ -49,7 +49,7 @@ const Categories = () => {
   const openCategory = async ({ category: inputCategory }) => {
     try {
       dispatch({ type: SET_LOADING, value: true });
-      const { data: { category, articles } } = await Api.getAllNewsByCategoryAndCountry({
+      const { category, articles } = await Api.getAllNewsByCategoryAndCountry({
         category: inputCategory,
         country: 'gb',
       });
